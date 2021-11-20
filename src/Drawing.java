@@ -39,6 +39,10 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         currentColor = c;
     }
 
+    public Color getColor() {
+        return currentColor;
+    }
+
     public void changeFigure(String f) {
         currentFigureName = f;
     }
@@ -93,12 +97,6 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
     @Override
     public void mouseReleased(MouseEvent e) {
-     /*   Graphics g = getGraphics();
-
-        for (int i = 0; i < DrawList.size(); i++) {
-            DrawList.get(i).draw(g);
-        }
-*/
         repaint();
     }
 
@@ -158,14 +156,6 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     }
 
 
-    public void undo() {
-        Graphics g = getGraphics();
-        DrawList.remove(DrawList.size() - 1);
-        this.repaint();
-        for (int i = 0; i < DrawList.size(); i++) {
-            DrawList.get(i).draw(g);
-        }
-    }
 
 
     public void save() { //Will save all objets of the draw in a file
