@@ -52,11 +52,6 @@ public class Window extends JFrame implements ActionListener {
         version.addActionListener(this);
         m.add(menu2);
 
-        JMenu menu3 = new JMenu("Edit");
-        JMenuItem Undo = new JMenuItem("Undo");
-        menu3.add(Undo);
-        Undo.addActionListener(this);
-        m.add(menu3);
 
         setJMenuBar(m);
 
@@ -66,7 +61,7 @@ public class Window extends JFrame implements ActionListener {
 
 
         JPanel South = new JPanel();
-        South.setLayout(new GridLayout(1,3));
+        South.setLayout(new GridLayout(1,4));
 
         //Buttons for the color
         JPanel SouthWest = new JPanel();
@@ -111,6 +106,17 @@ public class Window extends JFrame implements ActionListener {
         LineSize(SizeLine,"Size : 3");
         South.add(SizeLine);
 
+
+
+        JPanel ColorChange = new JPanel();
+        ColorChange.setLayout(new GridLayout(2,1));
+
+        ColorChangeButton(ColorChange,"Lighter");
+        ColorChangeButton(ColorChange,"Darker");
+        South.add(ColorChange);
+
+
+
         contentPanel.add(South,BorderLayout.SOUTH);
 
         this.setVisible(true);
@@ -143,6 +149,12 @@ public class Window extends JFrame implements ActionListener {
         button.addActionListener(this);
         Cont.add(button);
         ButtonForOther.add(Name);
+    }
+
+    public void ColorChangeButton(Container Cont,String Name){
+        JButton button = new JButton(Name);
+        button.addActionListener(this);
+        Cont.add(button);
     }
 
     @Override
@@ -195,7 +207,7 @@ public class Window extends JFrame implements ActionListener {
                 break;
             case "Version":
                 JOptionPane info_version = new JOptionPane();
-                info_version.showInternalMessageDialog(info_version,"Latest version : 0.5.4","Version",JOptionPane.INFORMATION_MESSAGE);
+                info_version.showInternalMessageDialog(info_version,"Latest version : 3.2.4","Version",JOptionPane.INFORMATION_MESSAGE);
                 break;
             case "Open":
                 System.out.println("Open");
@@ -208,31 +220,22 @@ public class Window extends JFrame implements ActionListener {
             case "New":
                 System.out.println("New");
                 draw.newDraw();
-
-
                 break;
             case "Quit":
                 System.out.println("Quit");
                 this.dispose();
                 break;
-            case "Undo":
-                System.out.println("Undo");
-                draw.undo();
+            case "Lighter":
+                System.out.println("Lighter");
+                draw.changeColor(draw.getColor().brighter());
                 break;
-
+            case "Darker":
+                System.out.println("Darker");
+                draw.changeColor(draw.getColor().darker());
+                break;
         }
 
 
-    }
-
-    public void save(){
-        try{
-            ObjectOutputStream oos = new ObjectOutputStream( new FileOutputStream("saveDrawing") );
-
-        }
-        catch (Exception e){
-            System.out.println("Problem for saving the draw!");
-        }
     }
 
 
